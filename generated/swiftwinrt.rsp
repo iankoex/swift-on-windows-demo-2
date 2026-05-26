@@ -1,0 +1,11 @@
+-input sdk+
+-output C:\Users\ian\Developer\swift-on-windows-demo-2\generated
+
+-include Windows.Foundation
+-include Windows.Foundation.Collections
+-include Windows.Foundation.Uri
+
+-exclude Windows.Foundation.PropertyValue
+
+-verbose
+-overwrite
