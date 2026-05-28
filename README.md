@@ -562,7 +562,7 @@ The hand-written `PropertyValue` class in `Support/propertyvalue.swift` provides
 
 ### Why does COM need to be initialized?
 
-WinRT is fundamentally built on COM. Every WinRT API call goes through COM interfaces, and COM requires the calling thread to specify its concurrency model via `CoInitializeEx` or `RoInitialize`. This is not unique to Swift - every language projection for WinRT (C++, Rust, C#, etc.) requires this step. In a C++/WinRT app, the activation factory handles it implicitly. In Swift, you call `RoInitialize(RO_INIT_TYPE(1))` explicitly at the start of `main()`.
+WinRT is fundamentally built on COM. Every WinRT API call goes through COM interfaces, and COM requires the calling thread to specify its concurrency model via `CoInitializeEx` or `RoInitialize`. This is not unique to Swift - every language projection for WinRT (C++, Rust, C#, etc.) requires this step. In a C++/WinRT app, you call `winrt::init_apartment()` at the start of `main()`. In Swift, you call `RoInitialize(RO_INIT_TYPE(1))` instead. Both are explicit.
 
 ## Limitations and Future Work
 
@@ -575,4 +575,3 @@ What we've covered here is the foundation - using `Windows.Foundation.Uri` as a 
 - **The `-spm` flag**: Swift/WinRT has a declared `-spm` option that's meant to generate a `Package.swift` automatically, but it's currently unimplemented (dead code). This means the `Package.swift` must be hand-written today. This would be a great contribution to the project.
 
 - **WinUI and WinAppSDK**: Once you have the Windows.Foundation bindings working, the same generation process can produce bindings for `Microsoft.UI.Xaml` (WinUI) and `Microsoft.Windows.AppLifecycle` (Windows App SDK), enabling native UI applications.
-
